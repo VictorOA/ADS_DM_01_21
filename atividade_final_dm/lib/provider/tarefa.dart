@@ -32,7 +32,6 @@ class Tarefas with ChangeNotifier {
   }
 
   void finaliza(Tarefa tarefa) {
-    print(tarefa.id);
     tarefa.status = 'FEITO';
     _tarefasFinalizadas.putIfAbsent(tarefa.id.toString(), () => tarefa);
     _items.remove(tarefa.id.toString());
@@ -40,10 +39,11 @@ class Tarefas with ChangeNotifier {
   }
 
   void put(Tarefa tarefa) {
-    if (_items.containsKey(tarefa.id)) {
+    if (_items.containsKey(tarefa.id.toString())) {
       _items.update(tarefa.id.toString(), (_) => tarefa);
     } else {
-      final id = Random().nextDouble().toInt();
+      int id = Random().nextInt(1000);
+
       tarefa.id = id;
       _items.putIfAbsent(id.toString(), () => tarefa);
     }

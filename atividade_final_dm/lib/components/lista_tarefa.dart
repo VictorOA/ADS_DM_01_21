@@ -19,8 +19,15 @@ class ComponenteTarefa extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.done_sharp),
                 color: Colors.green,
+                tooltip: 'Finalizar tarefa',
                 onPressed: () {
                   Provider.of<Tarefas>(context, listen: false).finaliza(tarefa);
+                  showDialog(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                            title: Text('Informativo'),
+                            content: Text('Tarefa finalizada com sucesso'),
+                          ));
                 },
               ),
               IconButton(
